@@ -1,12 +1,12 @@
 /// import * as Autodesk from "@types/forge-viewer";
 
 const DATAGRID_CONFIG = {
-    requiredProps: ['name', 'Volume', 'Level'], // Which properties should be requested for each object
+    requiredProps: ['name', 'Volume', 'Price'], // Which properties should be requested for each object
     columns: [ // Definition of individual grid columns (see http://tabulator.info for more details)
         { title: 'ID', field: 'dbid' },
         { title: 'Name', field: 'name', width: 150 },
-        { title: 'Volume', field: 'volume', hozAlign: 'left', formatter: 'progress' },
-        { title: 'Level', field: 'level' }
+        { title: 'Volume', field: 'volume', hozAlign: 'left' },
+        { title: 'Price', field: 'price', editor:"input" }
     ],
     groupBy: 'level', // Optional column to group by
     createRow: (dbid, name, props) => { // Function generating grid rows based on recieved object properties

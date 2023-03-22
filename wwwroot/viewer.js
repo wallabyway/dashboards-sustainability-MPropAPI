@@ -1,7 +1,6 @@
 /// import * as Autodesk from "@types/forge-viewer";
 
 import './extensions/LoggerExtension.js';
-import './extensions/SummaryExtension.js';
 import './extensions/DataGridExtension.js';
 import './extensions/HistogramExtension.js';
 
@@ -22,9 +21,9 @@ export function initViewer(container) {
     return new Promise(function (resolve, reject) {
         Autodesk.Viewing.Initializer({ getAccessToken }, async function () {
 			const extensions = { extensions: [
-                    'Autodesk.DocumentBrowser',
+                    'Autodesk.Vault.Markups',
+                    'Autodesk.VisualClusters',
                     'LoggerExtension',
-                    'SummaryExtension',
                     'DataGridExtension',
                     'HistogramExtension'
                 ]};
@@ -36,11 +35,8 @@ export function initViewer(container) {
     });
 }
 
-export function loadTiles(viewer, urn) {
-	viewer.getExtension('ThreeTilesExtension').addURN(urn, {showDebugBoxes:false, pointSize: 5, geomScale: 0.04});
-}
-
 export function loadModel(viewer, urn) {
+	console.table({"URN":urn, "decodedURN": atob(urn)});
     function onDocumentLoadSuccess(doc) {
         viewer.loadDocumentNode(doc, doc.getRoot().getDefaultGeometry());
     }
