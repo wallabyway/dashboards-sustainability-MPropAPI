@@ -3,15 +3,15 @@
 const DATAGRID_CONFIG = {
     requiredProps: ['name', 'Volume', 'Price'], // Which properties should be requested for each object
     columns: [ // Definition of individual grid columns (see http://tabulator.info for more details)
-        { title: 'ID', field: 'dbid' },
+        { title: 'ID', field: 'id' },
         { title: 'Name', field: 'name', width: 150 },
-        { title: 'Volume', field: 'volume', hozAlign: 'left' },
+        { title: 'AreaTotal', field: 'value', hozAlign: 'left' },
         { title: 'Price', field: 'price', editor:"input" }
     ],
     groupBy: 'level', // Optional column to group by
     createRow: (dbid, name, props) => { // Function generating grid rows based on recieved object properties
-        const volume = props.find(p => p.displayName === 'Volume')?.displayValue;
-        const level = props.find(p => p.displayName === 'Level' && p.displayCategory === 'Constraints')?.displayValue;
+        const volume = "volume";
+        const level = "level";
         return { dbid, name, volume, level };
     },
     onRowClick: (row, viewer) => {
@@ -50,11 +50,7 @@ export class DataGridPanel extends Autodesk.Viewing.UI.DockingPanel {
         });
     }
 
-    update(model, dbids) {
-        model.getBulkProperties(dbids, { propFilter: DATAGRID_CONFIG.requiredProps }, (results) => {
-            this.table.replaceData(results.map((result) => DATAGRID_CONFIG.createRow(result.dbId, result.name, result.properties)));
-        }, (err) => {
-            console.error(err);
-        });
+    update(model, rows) {
+		this.table.replaceData(rows);		
     }
 }

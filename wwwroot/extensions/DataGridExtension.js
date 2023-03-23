@@ -54,9 +54,28 @@ class DataGridExtension extends BaseExtension {
         }
     }
 
+    async findPropertyValueQuantities(model, typeName) {
+        const dbids = await this.findLeafNodes(model);
+        return new Promise(function (resolve, reject) {
+            model.getBulkProperties(dbids, { categoryFilter: [typeName] }, function (results) {
+                let map = new Map();
+                for (const result of results) {
+					const key = result.properties[1].displayValue; // Group by Category
+					const value = result.properties.find( i => i.displayName === "Area" ); // search for area value
+					if (value)
+						map.set(key, (map.get(key) || 0) + value.displayValue);
+                }
+                resolve(map);
+            }, reject);
+        });
+    }
+
     async update() {
-        const dbids = await this.findLeafNodes(this.viewer.model);
-        this._panel.update(this.viewer.model, dbids);
+        const resultsMap = await this.findPropertyValueQuantities(this.viewer.model, "Structural Material");
+		const results = Array.from(resultsMap).map(([name, value]) => ({name, value}))
+
+		console.log(results);
+        this._panel.update(this.viewer.model, results);
     }
 }
 

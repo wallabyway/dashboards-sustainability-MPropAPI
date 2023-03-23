@@ -46,3 +46,8 @@ export function loadModel(viewer, urn) {
     }
     Autodesk.Viewing.Document.load('urn:' + urn, onDocumentLoadSuccess, onDocumentLoadFailure);
 }
+
+
+setTimeout( () =>{
+	loadModel (NOP_VIEWER, "dXJuOmFkc2sud2lwZW1lYTpmcy5maWxlOnZmLm04SmdKVWFjUWhHRlJsYTNoWmRUTGc/dmVyc2lvbj0x");
+},4000)
