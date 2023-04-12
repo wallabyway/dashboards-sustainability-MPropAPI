@@ -1,11 +1,28 @@
 # Dashboards-Sustainability-MPropAPI
-Template for a sustainability dashboard using Material Quantities pulled from Model Properties API
 
+### GOALS:
+
+1. Provide a Template to build a simple Carbon Cost Calculator, specifically leveraging the Model Properties API to aggregate the Material Quantities.  Model Properties API pulls Model data, to calculate a histogram of Materials and their total Volume, Area, Length.  Each Material is then matched to a Carbon Cost (taken manually from an EPD database).  See Note #3, below
+2. Can Model Derivative API Team expose the hidden Layered Materials by adding the C# code found in Note #1 (below)
+
+### NOTES:
+
+1. Revit C# Source code to Extract Hidden Layers is here: https://github.com/JoaoMartins-callmeJohn/da4r-extractmaterialquantities/blob/main/ExtractMaterials.cs 
+2. Example of using this DLL in DA4Revit and formatted into Interface for OneClick LCA API is here: https://github.com/wallabyway/compositeLayersExtractor
+3. A Sample Revit file, containing an example of compound materials, can be found '/Revit-Sample'.  Compare the results found in the AU presentation in #4 and #5 below:
+4. See the presentation slides: https://docs.google.com/presentation/d/1nKkGv_GEnccQVT4E2a8U0TxZVuR41nt6S8q_ymNdGx4/edit?usp=sharing
+5. See the AU Talk here: https://www.autodesk.com/autodesk-university/class/Design-Zero-Carbon-Decarbonizing-Revit-House-together-2022
+
+![banner](https://user-images.githubusercontent.com/440241/231312428-29685e40-bafa-4eb9-84d7-162787a2a3d3.png)
+
+<hr>
 
 ![platforms](https://img.shields.io/badge/platform-windows%20%7C%20osx%20%7C%20linux-lightgray.svg)
 [![node.js](https://img.shields.io/badge/Node.js-16.16-blue.svg)](https://nodejs.org)
 [![npm](https://img.shields.io/badge/npm-8.11-blue.svg)](https://www.npmjs.com/)
 [![license](https://img.shields.io/:license-mit-green.svg)](https://opensource.org/licenses/MIT)
+
+
 
 [Autodesk Platform Services](https://aps.autodesk.com) application built by following
 the [Hubs Browser](https://tutorials.autodesk.io/tutorials/hubs-browser/) tutorial
